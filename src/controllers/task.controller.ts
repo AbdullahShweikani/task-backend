@@ -131,6 +131,7 @@ export async function updateTaskController(
     const { ...updateData } = req.body;
 
     const task = await getTaskByIdService(id);
+    console.log("🚀 ~ task:", task)
 
     if (!task) {
       return clientErrorResponse(res, {
@@ -141,7 +142,8 @@ export async function updateTaskController(
 
     const user = req.user;
 
-    const isTaskOwner = task.createdBy.toString() === user.id;
+    const isTaskOwner = task.assignedTo === user.id;
+    console.log("🚀 ~ isTaskOwner:", isTaskOwner)
 
     if (!isTaskOwner && req.role !== "admin") {
       return clientErrorResponse(res, {

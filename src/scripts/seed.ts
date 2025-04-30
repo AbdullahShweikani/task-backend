@@ -41,22 +41,8 @@ async function seed() {
     ]);
     console.log("✅ Users seeded");
 
-    const admin = insertedUsers.find((u) => u.role === "admin")!;
-    const users = insertedUsers.filter((u) => u.role === "user");
 
-    const taskData = Array.from({ length: 10 }).map((_, i) => ({
-      title: `Task ${i + 1}`,
-      description: `Description for Task ${i + 1}`,
-      dueDate: new Date(Date.now() + i * 86400000),
-      priority: i % 3 === 0 ? "High" : i % 3 === 1 ? "Medium" : "Low",
-      status: i % 3 === 0 ? "To Do" : i % 3 === 1 ? "In Progress" : "Done",
-      assignedTo: users[i % users.length]._id,
-      createdBy: admin._id, // ✅ Created by admin
-      isRecurring: i % 2 === 0,
-      recurrencePattern: i % 2 === 0 ? "daily" : null,
-    }));
 
-    await Task.insertMany(taskData);
     console.log("✅ Tasks seeded");
 
     process.exit(0);
