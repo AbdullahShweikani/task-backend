@@ -142,16 +142,17 @@ export async function updateTaskController(
 
     const user = req.user;
 
-    const isTaskOwner = task.assignedTo === user.id;
-    console.log("🚀 ~ isTaskOwner:", isTaskOwner)
-
-    if (!isTaskOwner && req.role !== "admin") {
+    const isAssignedToUser = task.assignedTo?._id.toString() === user.id;
+    console.log("🚀 ~ isAssignedToUser:", isAssignedToUser)
+    const isCreatedByUser = task.createdBy.toString() === user.id;
+    console.log("🚀 ~ isCreatedByUser:", isCreatedByUser)
+    
+    if (!isAssignedToUser && !isCreatedByUser && req.role !== "admin") {
       return clientErrorResponse(res, {
         en: "You are not allowed to update this task",
         ar: "غير مسموح لك بتحديث هذه المهمة",
       });
     }
-
     const allowedFieldsForUser = [
       "title",
       "description",
