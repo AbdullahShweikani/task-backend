@@ -23,15 +23,15 @@ Edit the file to match your environment
 🚀 Getting Started
 1. Install dependencies
 
-    pnpm install
-    # or
-    npm install
+        pnpm install
+        # or
+        npm install
 
 2. Run the server
 
-    pnpm dev
-    # or
-    npm run dev
+        pnpm dev
+        # or
+        npm run dev
 
     The server will start on the port defined in .env (PORT=3500 by default).
 
